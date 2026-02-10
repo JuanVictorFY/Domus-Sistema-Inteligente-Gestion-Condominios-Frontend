@@ -119,3 +119,6 @@ html, body, #root {
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 3px; }
+
+/* Focus visible for accessibility */
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
