@@ -1280,3 +1280,6 @@ input:-webkit-autofill:focus {
 .phone-notif-toast {
   animation: phoneNotifSlide 12s ease-in-out infinite;
 }
+
+/* Print media query */
+@media print { .no-print { display: none !important; } }
