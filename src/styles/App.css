@@ -1283,3 +1283,6 @@ input:-webkit-autofill:focus {
 
 /* Print media query */
 @media print { .no-print { display: none !important; } }
+
+/* Skeleton loading animation */
+.skeleton { background: linear-gradient(90deg, #f0f0f0 25
