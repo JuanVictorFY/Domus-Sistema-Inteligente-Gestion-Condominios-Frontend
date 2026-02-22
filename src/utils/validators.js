@@ -37,3 +37,6 @@ export const isUrl = (v) => {
   try { new URL(v); return null; }
   catch { return 'Ingresa una URL válida.'; }
 };
+
+// Password strength validator
+export const validatePasswordStrength = (pwd) => pwd.length >= 8 && /[A-Z]/.test(pwd) && /[0-9]/.test(pwd);
