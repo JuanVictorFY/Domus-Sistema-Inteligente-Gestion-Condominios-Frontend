@@ -62,3 +62,6 @@ export const downloadCSV = (data, filename = 'reporte') => {
   a.click();
   URL.revokeObjectURL(url);
 };
+
+// Phone number formatter
+export const formatPhone = (phone) => phone.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
