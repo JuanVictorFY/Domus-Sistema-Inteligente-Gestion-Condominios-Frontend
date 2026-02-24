@@ -43,3 +43,6 @@ export const daysBetween = (a, b) => {
   const msPerDay = 1000 * 60 * 60 * 24;
   return Math.abs(Math.round((new Date(b) - new Date(a)) / msPerDay));
 };
+
+// Relative time
+export const getRelativeTime = (date) => { const diff = Date.now() - new Date(date); const days = Math.floor(diff / 86400000); return days === 0 ? "hoy" : days === 1 ? "ayer" : `hace ${days} dias`; };
