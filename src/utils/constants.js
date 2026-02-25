@@ -52,3 +52,5 @@ export const MAINTENANCE_STATUSES = {
   COMPLETADO:  { label: 'Completado',  color: 'success'   },
   CANCELADO:   { label: 'Cancelado',   color: 'secondary' },
 };
+
+export const PAGINATION_DEFAULTS = { page: 1, limit: 10, maxPages: 100 };
