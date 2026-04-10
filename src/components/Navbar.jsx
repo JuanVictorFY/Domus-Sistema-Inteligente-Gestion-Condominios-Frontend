@@ -138,3 +138,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+// Mobile menu state added
