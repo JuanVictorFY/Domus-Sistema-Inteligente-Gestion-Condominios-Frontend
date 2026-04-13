@@ -100,3 +100,5 @@ const Hero = () => {
 };
 
 export default Hero;
+
+// Lazy loading for hero image
