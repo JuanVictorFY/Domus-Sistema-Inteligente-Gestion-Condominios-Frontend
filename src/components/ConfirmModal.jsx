@@ -26,3 +26,5 @@ const ConfirmModal = ({ id = 'confirmModal', title = '¿Estás seguro?', message
 );
 
 export default ConfirmModal;
+
+// Keyboard escape handler
