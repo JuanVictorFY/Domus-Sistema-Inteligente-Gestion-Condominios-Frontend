@@ -176,3 +176,5 @@ const Login = () => {
 export default Login;
 
 // Remember me flag
+
+// Social auth buttons
