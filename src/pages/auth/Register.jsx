@@ -149,3 +149,4 @@ const Register = () => {
 };
 
 export default Register;
+// Password strength indicator
