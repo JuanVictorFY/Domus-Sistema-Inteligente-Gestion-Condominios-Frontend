@@ -83,3 +83,4 @@ const ResetPassword = () => {
 };
 
 export default ResetPassword;
+// Success state
