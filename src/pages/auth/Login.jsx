@@ -178,3 +178,5 @@ export default Login;
 // Remember me flag
 
 // Social auth buttons
+
+// Inline error messages
