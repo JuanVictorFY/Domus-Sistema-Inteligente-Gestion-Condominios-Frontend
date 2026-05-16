@@ -3300,3 +3300,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+// Resident search filter
