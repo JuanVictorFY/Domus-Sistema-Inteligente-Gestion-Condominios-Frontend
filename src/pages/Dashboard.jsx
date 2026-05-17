@@ -3302,3 +3302,5 @@ const Dashboard = () => {
 export default Dashboard;
 
 // Resident search filter
+
+// Export to PDF
