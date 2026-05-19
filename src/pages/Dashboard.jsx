@@ -3306,3 +3306,5 @@ export default Dashboard;
 // Export to PDF
 
 // Dark mode toggle
+
+// Notification panel
