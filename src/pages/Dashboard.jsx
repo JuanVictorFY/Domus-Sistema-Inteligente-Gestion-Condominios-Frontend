@@ -3308,3 +3308,5 @@ export default Dashboard;
 // Dark mode toggle
 
 // Notification panel
+
+// Real-time indicators
