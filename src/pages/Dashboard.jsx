@@ -3310,3 +3310,5 @@ export default Dashboard;
 // Notification panel
 
 // Real-time indicators
+
+// Mobile responsive tables
