@@ -3312,3 +3312,5 @@ export default Dashboard;
 // Real-time indicators
 
 // Mobile responsive tables
+
+// Keyboard shortcuts
