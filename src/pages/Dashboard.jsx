@@ -1062,17 +1062,58 @@ const AdminDashboard = ({ activeTab, onOpenModal, residents, setResidents, comun
     } catch (err) { alert(err.response?.data?.error || 'Error al eliminar ticket'); }
   };
 
+  let tabContent;
   switch (activeTab) {
-    case 'Directorio Residentes': return <AdminDirectorio onOpenModal={onOpenModal} residents={residents} setResidents={setResidents} onCreateResident={handleCreateResident} onEditResident={handleEditResident} onDeleteResident={handleDeleteResident} onApprove={handleApproveResident} onReject={handleRejectResident} isLoading={isLoadingUsers} error={usersError} />;
-    case 'Gestión de Seguridad': return <AdminSeguridad onOpenModal={onOpenModal} residents={residents} onCreate={handleCreateSecurity} onEdit={handleEditResident} onDelete={handleDeleteResident} onApprove={handleApproveResident} onReject={handleRejectResident} />;
-    case 'Registro de Visitas': return <AdminVisitas onOpenModal={onOpenModal} visitors={visitors} onUpdateStatus={handleUpdateVisitorStatus} />;
-    case 'Comunicados': return <AdminComunicados onOpenModal={onOpenModal} comunicados={comunicados} onCreate={handleCreateComunicado} onEdit={handleEditComunicado} onDelete={handleDeleteComunicado} />;
-    case 'Gestión de Áreas': return <AdminAreas onOpenModal={onOpenModal} areas={areas} onCreate={handleCreateArea} onEdit={handleEditArea} onDelete={handleDeleteArea} onToggleStatus={handleToggleAreaStatus} reservations={reservations} onApproveReservation={handleApproveReservation} onRejectReservation={handleRejectReservation} />;
-    case 'Mantenimiento': return <AdminMantenimiento onOpenModal={onOpenModal} tickets={tickets} onCreate={handleCreateTicket} onChangeStatus={handleChangeTicketStatus} onAssign={handleAssignTicket} onAddNotes={handleAddTicketNotes} onDelete={handleDeleteTicket} />;
-    case 'Votaciones': return <AdminVotaciones onOpenModal={onOpenModal} />;
-    case 'Configuraciones': return <AdminConfiguraciones onOpenModal={onOpenModal} settings={settings} setSettings={setSettings} residents={residents} onApprove={handleApproveResident} onReject={handleRejectResident} onCreateAdmin={handleCreateAdmin} onEditAdmin={handleEditResident} onDeleteAdmin={handleDeleteResident} /> ;
-    default: return <AdminPanelControl onOpenModal={onOpenModal} tickets={tickets} residents={residents} />;
+    case 'Directorio Residentes': tabContent = <AdminDirectorio onOpenModal={onOpenModal} residents={residents} setResidents={setResidents} onCreateResident={handleCreateResident} onEditResident={handleEditResident} onDeleteResident={handleDeleteResident} onApprove={handleApproveResident} onReject={handleRejectResident} isLoading={isLoadingUsers} error={usersError} />; break;
+    case 'Gestión de Seguridad': tabContent = <AdminSeguridad onOpenModal={onOpenModal} residents={residents} onCreate={handleCreateSecurity} onEdit={handleEditResident} onDelete={handleDeleteResident} onApprove={handleApproveResident} onReject={handleRejectResident} />; break;
+    case 'Registro de Visitas': tabContent = <AdminVisitas onOpenModal={onOpenModal} visitors={visitors} onUpdateStatus={handleUpdateVisitorStatus} />; break;
+    case 'Comunicados': tabContent = <AdminComunicados onOpenModal={onOpenModal} comunicados={comunicados} onCreate={handleCreateComunicado} onEdit={handleEditComunicado} onDelete={handleDeleteComunicado} />; break;
+    case 'Gestión de Áreas': tabContent = <AdminAreas onOpenModal={onOpenModal} areas={areas} onCreate={handleCreateArea} onEdit={handleEditArea} onDelete={handleDeleteArea} onToggleStatus={handleToggleAreaStatus} reservations={reservations} onApproveReservation={handleApproveReservation} onRejectReservation={handleRejectReservation} />; break;
+    case 'Mantenimiento': tabContent = <AdminMantenimiento onOpenModal={onOpenModal} tickets={tickets} onCreate={handleCreateTicket} onChangeStatus={handleChangeTicketStatus} onAssign={handleAssignTicket} onAddNotes={handleAddTicketNotes} onDelete={handleDeleteTicket} />; break;
+    case 'Votaciones': tabContent = <AdminVotaciones onOpenModal={onOpenModal} />; break;
+    case 'Configuraciones': tabContent = <AdminConfiguraciones onOpenModal={onOpenModal} settings={settings} setSettings={setSettings} residents={residents} onApprove={handleApproveResident} onReject={handleRejectResident} onCreateAdmin={handleCreateAdmin} onEditAdmin={handleEditResident} onDeleteAdmin={handleDeleteResident} />; break;
+    default: tabContent = <AdminPanelControl onOpenModal={onOpenModal} tickets={tickets} residents={residents} />;
   }
+
+  return (
+    <>
+      {tabContent}
+      <Modal show={!!createdUser} onClose={() => setCreatedUser(null)} title="Usuario creado exitosamente">
+        {createdUser && (
+          <div className="text-center py-2">
+            <div className="mb-4">
+              <i className="bi bi-person-check-fill text-info" style={{ fontSize: '3rem' }}></i>
+            </div>
+            <div className="d-flex flex-column gap-3 text-start mb-4">
+              <div className="d-flex align-items-center gap-3 p-3 rounded-3" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                <i className="bi bi-person-fill text-info fs-5"></i>
+                <div>
+                  <div className="text-white-50 small">Nombre</div>
+                  <div className="text-white fw-semibold">{createdUser.name}</div>
+                </div>
+              </div>
+              <div className="d-flex align-items-center gap-3 p-3 rounded-3" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                <i className="bi bi-envelope-fill text-info fs-5"></i>
+                <div>
+                  <div className="text-white-50 small">Correo</div>
+                  <div className="text-white fw-semibold">{createdUser.email}</div>
+                </div>
+              </div>
+              <div className="d-flex align-items-center gap-3 p-3 rounded-3" style={{ background: 'rgba(0,212,255,0.08)', border: '1px solid rgba(0,212,255,0.2)' }}>
+                <i className="bi bi-key-fill text-info fs-5"></i>
+                <div>
+                  <div className="text-white-50 small">Contraseña temporal</div>
+                  <div className="fw-bold fs-5 font-monospace" style={{ color: '#00d4ff', letterSpacing: '4px' }}>{createdUser.password}</div>
+                </div>
+              </div>
+            </div>
+            <p className="text-white-50 small mb-4">Se envió un correo de bienvenida con estas credenciales. Se recomienda cambiar la contraseña al iniciar sesión.</p>
+            <button className="btn btn-info rounded-pill px-4 fw-bold" onClick={() => setCreatedUser(null)}>Aceptar</button>
+          </div>
+        )}
+      </Modal>
+    </>
+  );
 };
 
 const ResidenteMiDomicilio = ({ userName, userEmail, userDepto, onOpenModal, integrantes, setIntegrantes, setVisitas, setReservas, onCreateReserva, onCreateVisita, onCreateIncidencia, onAddIntegrante, onDeleteIntegrante }) => {
@@ -1466,41 +1507,6 @@ const ResidenteEstacionamiento = ({ onOpenModal, solicitudes, setSolicitudes }) 
           </div>
         </div>
       )}
-
-      <Modal show={!!createdUser} onClose={() => setCreatedUser(null)} title="Usuario creado exitosamente">
-        {createdUser && (
-          <div className="text-center py-2">
-            <div className="mb-4">
-              <i className="bi bi-person-check-fill text-info" style={{ fontSize: '3rem' }}></i>
-            </div>
-            <div className="d-flex flex-column gap-3 text-start mb-4">
-              <div className="d-flex align-items-center gap-3 p-3 rounded-3" style={{ background: 'rgba(255,255,255,0.05)' }}>
-                <i className="bi bi-person-fill text-info fs-5"></i>
-                <div>
-                  <div className="text-white-50 small">Nombre</div>
-                  <div className="text-white fw-semibold">{createdUser.name}</div>
-                </div>
-              </div>
-              <div className="d-flex align-items-center gap-3 p-3 rounded-3" style={{ background: 'rgba(255,255,255,0.05)' }}>
-                <i className="bi bi-envelope-fill text-info fs-5"></i>
-                <div>
-                  <div className="text-white-50 small">Correo</div>
-                  <div className="text-white fw-semibold">{createdUser.email}</div>
-                </div>
-              </div>
-              <div className="d-flex align-items-center gap-3 p-3 rounded-3" style={{ background: 'rgba(0,212,255,0.08)', border: '1px solid rgba(0,212,255,0.2)' }}>
-                <i className="bi bi-key-fill text-info fs-5"></i>
-                <div>
-                  <div className="text-white-50 small">Contraseña temporal</div>
-                  <div className="fw-bold fs-5 font-monospace" style={{ color: '#00d4ff', letterSpacing: '4px' }}>{createdUser.password}</div>
-                </div>
-              </div>
-            </div>
-            <p className="text-white-50 small mb-4">Se envió un correo de bienvenida con estas credenciales. Se recomienda cambiar la contraseña al iniciar sesión.</p>
-            <button className="btn btn-info rounded-pill px-4 fw-bold" onClick={() => setCreatedUser(null)}>Aceptar</button>
-          </div>
-        )}
-      </Modal>
 
     </div>
   );
