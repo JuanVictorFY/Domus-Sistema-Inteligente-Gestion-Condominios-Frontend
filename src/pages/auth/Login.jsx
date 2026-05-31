@@ -113,32 +113,38 @@ const Login = () => {
 
               <form onSubmit={isForgot ? handleForgot : handleLogin}>
                 <div className="mb-4">
-                  <label className="form-label text-white-50 small fw-bold text-uppercase">Correo Electrónico</label>
-                  <input 
-                    type="email" 
-                    className="form-control text-white shadow-none py-3" 
-                    style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }} 
-                    placeholder="ejemplo@correo.com" 
+                  <label htmlFor="login-email" className="form-label text-white-50 small fw-bold text-uppercase">Correo Electrónico</label>
+                  <input
+                    id="login-email"
+                    name="email"
+                    type="email"
+                    className="form-control text-white shadow-none py-3"
+                    style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}
+                    placeholder="ejemplo@correo.com"
                     value={email}
                     onChange={(e) => { if (e.target.value.length <= 100) setEmail(e.target.value); }}
                     maxLength={100}
+                    autoComplete="email"
                   />
                 </div>
                 {!isForgot ? (
                   <>
                     <div className="mb-4">
                       <div className="d-flex justify-content-between">
-                        <label className="form-label text-white-50 small fw-bold text-uppercase">Contraseña</label>
+                        <label htmlFor="login-password" className="form-label text-white-50 small fw-bold text-uppercase">Contraseña</label>
                         <button type="button" onClick={() => { setIsForgot(true); setError(''); setSuccessMsg(''); }} className="btn btn-link text-info small text-decoration-none hover-cyan p-0 border-0 shadow-none">¿Olvidaste tu contraseña?</button>
                       </div>
-                      <input 
-                        type="password" 
-                        className="form-control text-white shadow-none py-3" 
-                        style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }} 
-                        placeholder="••••••••" 
+                      <input
+                        id="login-password"
+                        name="password"
+                        type="password"
+                        className="form-control text-white shadow-none py-3"
+                        style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}
+                        placeholder="••••••••"
                         value={password}
                         onChange={(e) => { if (e.target.value.length <= 50) setPassword(e.target.value); }}
                         maxLength={50}
+                        autoComplete="current-password"
                       />
                     </div>
                     <button type="submit" className="btn btn-premium-unique text-white w-100 py-3 rounded-pill fw-bold mb-4 mt-2 d-flex justify-content-center align-items-center" disabled={isLoading}>
